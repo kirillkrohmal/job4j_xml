@@ -8,12 +8,12 @@ public class StoreSQL implements AutoCloseable {
     private Config config;
     private Connection connect;
 
-    public StoreSQL(Config config) {
+    StoreSQL(Config config) {
         this.config = config;
         connect = config.init();
     }
 
-    public void generate(int size) {
+    void generate(int size) {
         for (int i = 0; i < size; i++) {
             String s1 = "INSERT INTO entry(i) VALUES (?)";
 
@@ -26,7 +26,7 @@ public class StoreSQL implements AutoCloseable {
         }
     }
 
-    public String findAll() {
+    String findAll() {
         String s1 = "SELECT field FROM items";
 
         try (PreparedStatement statement = connect.prepareStatement(s1);) {
@@ -41,7 +41,7 @@ public class StoreSQL implements AutoCloseable {
         return s1;
     }
 
-    public static void createNewDatabase(String fileName) throws SQLException {
+    private static void createNewDatabase(String fileName) throws SQLException {
 
         String url = "jdbc:sqlite:C:/sqlite/db/" + fileName;
 

@@ -9,7 +9,7 @@ public class Config {
     private final Properties values = new Properties();
     private Connection connection;
 
-    public Connection init() {
+    Connection init() {
         try (InputStream in = Config.class.getClassLoader().getResourceAsStream("app.properties")) {
             values.load(in);
 
